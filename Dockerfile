@@ -1,4 +1,4 @@
-FROM php:8.2-apache-alpine
+FROM php:8.2-alpine
 
 # Install SQLite3
 RUN apk add --no-cache sqlite
