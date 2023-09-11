@@ -1,11 +1,9 @@
 FROM php:8.2-apache
 
-# Install SQLite3
-RUN apk add --no-cache sqlite
-
-# Enable Apache mod_rewrite
-RUN apk add --no-cache apache2 && \
-    sed -i 's/#LoadModule rewrite_module modules\/mod_rewrite.so/LoadModule rewrite_module modules\/mod_rewrite.so/' /etc/apache2/httpd.conf
+# Install SQLite3 and enable Apache mod_rewrite
+RUN apt-get update && \
+    apt-get install -y sqlite3 libapache2-mod-rewrite && \
+    a2enmod rewrite
 
 # Copy application source
 COPY html/ /var/www/html/
@@ -17,4 +15,4 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 
 # Start the Apache web server
-CMD ["httpd", "-D", "FOREGROUND"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
