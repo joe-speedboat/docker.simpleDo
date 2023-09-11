@@ -11,3 +11,14 @@ To get this App, I did almost anything you shouldent.
 * So I got an unstructured app, which is working
 * Now I try if it can pack it into a docker container, which I can use instead of the boring hello world projects ...
 
+## How to Build and Run the Docker Container
+1. Build the Docker image by running the following command in the terminal:
+   ```
+   docker build -t simpledo .
+   ```
+2. Run the Docker container by running the following command in the terminal:
+   ```
+   docker run -p 8080:80 simpledo
+   ```
+After running these commands, you can access the application by opening a web browser and navigating to `http://localhost:8080`.
+
