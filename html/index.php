@@ -56,15 +56,19 @@
             echo htmlspecialchars($row['todo'], ENT_QUOTES, 'UTF-8') . '</td>';
             $deadline = new DateTime($row['deadline']);
             $now = new DateTime();
-            $interval = $now->diff($deadline)->days;
-            if ($interval <= $settings['days1']) {
+            if ($deadline < $now) {
                 $color = $settings['prio1'];
-            } elseif ($interval <= $settings['days2']) {
-                $color = $settings['prio2'];
-            } elseif ($interval <= $settings['days3']) {
-                $color = $settings['prio3'];
             } else {
-                $color = 'black';
+                $interval = $now->diff($deadline)->days;
+                if ($interval <= $settings['days1']) {
+                    $color = $settings['prio1'];
+                } elseif ($interval <= $settings['days2']) {
+                    $color = $settings['prio2'];
+                } elseif ($interval <= $settings['days3']) {
+                    $color = $settings['prio3'];
+                } else {
+                    $color = 'black';
+                }
             }
             echo '<td style="color: ' . $color . ';">' . htmlspecialchars($row['deadline'], ENT_QUOTES, 'UTF-8') . '</td>';
             echo '<td>';
